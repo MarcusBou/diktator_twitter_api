@@ -1,0 +1,7 @@
+{
+    "tweets" : [
+        {"username": "Vladimir Putin","date":"27-06-2022", "time": "12:00:01 AM", "Tweet": "Flækket lige Ukraine"},
+        {"username": "Vladimir Putin","date":"26-06-2022", "time": "12:00:01 AM", "Tweet": "Blev lige flækket Ukraine"},
+        {"username": "Vladimir Putin","date":"25-06-2022", "time": "12:00:01 AM", "Tweet": "Vi taber Sku Kampen i Ukraine"}
+    ]
+}
