@@ -36,12 +36,13 @@ app.get('/tweets', (req, res) => {
     res.send(`${message}||${key.toString('base64')}||${iv.toString('base64')}`);
 });
 
-app.get("/dictator", (req, res) => {
+app.get("/dictatorSelect", (req, res) => {
     let dictatorRequested = req.query.username;
     let rawData = fs.readFileSync(dictatorsPath);
     let data = JSON.parse(rawData);
     let selectedDictator = data.dictators.find(item => item.name == dictatorRequested);
-    res.send(selectedDictator);
+    let message = encrypt(JSON.stringify(selectedDictator));
+    res.send(`${message}||${key.toString('base64')}||${iv.toString('base64')}`);
 });
 
 app.get("/tweetsFromDic", (req, res) => {
@@ -49,10 +50,14 @@ app.get("/tweetsFromDic", (req, res) => {
     let tweetsList = [];
     let rawData = fs.readFileSync(tweetsPath);
     let data = JSON.parse(rawData);
-    for(var user in data['tweets']){
-        tweetsList.push(user['username']);
+    let tweets = data['tweets'];
+    tweets.forEach(element => {
+    if(element.username == dictatorRequested){
+        tweetsList.push(element);
     }
-    res.send(tweets);
+    });
+    let message = encrypt(JSON.stringify(tweetsList));
+    res.send(`${message}||${key.toString('base64')}||${iv.toString('base64')}`);
 });
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
